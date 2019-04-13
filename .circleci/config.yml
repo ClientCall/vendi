@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cirrusci/flutter:1.2.1
+    steps:
+      - checkout
+      - run: flutter doctor
+      - run: flutter test 
+      - run: flutter -v build apk
