@@ -1,6 +1,7 @@
 import 'package:vendi/models/store.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CardStore extends StatelessWidget {
   Store _cardData;
 
@@ -25,25 +26,25 @@ class CardStore extends StatelessWidget {
             left: 10.0,
             child: Container(
               width: 200.0,
-              height: 400.0,
+              height: 200.0,
               decoration: BoxDecoration(
                   color: Colors.blue,
                   borderRadius: BorderRadius.circular(10.0)),
             ),
           ),
           Container(
-            width: 300.0,
-            height: 400.0,
+            width: MediaQuery.of(context).size.width,
+            height: 200.0,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 image: DecorationImage(
                     image: AssetImage(this._cardData.urlImage), fit: BoxFit.cover)),
           ),
           Positioned(
-            top: 320.0,
+            top: 150.0,
             left: 15.0,
             child: Container(
-              width: 270.0,
+              width: MediaQuery.of(context).size.width - 100,
               height: 90.0,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
@@ -104,6 +105,5 @@ class CardStore extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }
