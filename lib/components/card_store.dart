@@ -11,7 +11,7 @@ class CardStore extends StatelessWidget {
       _cardData.description = '';
     }
     if(_cardData.urlImage == null) {
-      _cardData.urlImage = 'assets/store.jpg';
+      _cardData.urlImage = 'https://picsum.photos/250?image=9';
     }
   }
 
@@ -37,9 +37,9 @@ class CardStore extends StatelessWidget {
             height: 200.0,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                image: DecorationImage(
-                    image: AssetImage(this._cardData.urlImage), fit: BoxFit.cover)),
-          ),
+                 image: new DecorationImage(image: new NetworkImage(_cardData.urlImage),
+                fit: BoxFit.cover)
+            )),
           Positioned(
             top: 150.0,
             left: 15.0,
