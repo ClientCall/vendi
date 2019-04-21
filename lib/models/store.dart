@@ -14,7 +14,7 @@ class Store {
     user = parsedJson['user'];
     createdAt = parsedJson['created_at'];
     updateAt = parsedJson['update_at'];
-    urlImage = parsedJson['urlImage'];
+    urlImage = parsedJson['image'];
   }
 
   Store({ this.id, this.name, this.description, this.user, this.createdAt, this.updateAt, this.urlImage });
