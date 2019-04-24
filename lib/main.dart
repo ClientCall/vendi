@@ -57,26 +57,64 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> _cardStores = [];
-    _stores.forEach((store) => {
-      _cardStores.add(CardStore(store))
-    });
+    _stores.forEach((store) => {_cardStores.add(CardStore(store))});
 
-    return Scaffold(
-      appBar: NavBar.getAppBar(),      
-      body: !isLoading ? CustomScrollView(
-        shrinkWrap: true,
-        slivers: <Widget>[
-          SliverPadding(
-            padding: const EdgeInsets.all(20.0),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                _cardStores,
+    var ListStores = !isLoading
+        ? CustomScrollView(
+            shrinkWrap: true,
+            slivers: <Widget>[
+              SliverPadding(
+                padding: const EdgeInsets.all(20.0),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate(
+                    _cardStores,
+                  ),
+                ),
               ),
+            ],
+          )
+        : ColorLoader(colors: colors, duration: Duration(milliseconds: 1200));
+
+    // return Scaffold(
+    //   appBar: NavBar.getAppBar(),
+    //   body: ListStores,
+    // );
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue
+      ),
+      home: DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar:  AppBar(
+            bottom: TabBar(
+              tabs: <Widget>[
+                Tab(icon: Icon(Icons.store),),
+                Tab(icon: Icon(Icons.directions_subway),),
+                Tab(icon: Icon(Icons.directions_bike),),
+                Tab(icon: Icon(Icons.adjust))
+              ],
+              labelColor: Colors.white,
             ),
+            title: Text('Vendi'),
           ),
-        ],  
-      ) : 
-      ColorLoader(colors: colors, duration: Duration(milliseconds: 1200)), 
+          body: TabBarView(
+            children: <Widget>[
+              ListStores,
+              Icon(Icons.directions_subway),
+              Icon(Icons.directions_bike),
+              Column(
+                children: <Widget>[
+                  Image(
+                    image: NetworkImage('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'),
+                  ),
+                  Text('Hello world'),
+                ],
+              ),
+            ],
+          ),
+        ),
+      )
     );
   }
 }
