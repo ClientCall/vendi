@@ -19,7 +19,7 @@ class CardStore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 40.0),
+      padding: EdgeInsets.fromLTRB(5.0, 40.0, 5.0, 40.0),
       child: Stack(
         overflow: Overflow.visible,
         children: <Widget>[
@@ -39,7 +39,15 @@ class CardStore extends StatelessWidget {
               child: GestureDetector(
                 child: Hero(
                   tag: 'img-store-${_cardData.id}',
-                  child: Image.network(_cardData.urlImage),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      image: new DecorationImage(
+                          image: new NetworkImage(_cardData.urlImage),
+                          fit: BoxFit.cover,
+                      )
+                    )
+                  ) 
                 ),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
@@ -48,19 +56,12 @@ class CardStore extends StatelessWidget {
                   print('Click ${this._cardData.description}');
                 },
               ),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  // image: new DecorationImage(
-                  //     image: new NetworkImage(_cardData.urlImage),
-                  //     fit: BoxFit.cover,
-                  // )
-              )
           ),
           Positioned(
             top: 150.0,
             left: 15.0,
             child: Container(
-              width: MediaQuery.of(context).size.width - 100,
+              width: MediaQuery.of(context).size.width - 80,
               height: 90.0,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),

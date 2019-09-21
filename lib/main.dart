@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:vendi/components/card_store.dart';
 import 'package:vendi/components/loader.dart';
-import 'package:vendi/components/nav_bar.dart';
 import 'package:vendi/models/store.dart';
 import 'package:vendi/services/store.service.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Widget> _cardStores = [];
     _stores.forEach((store) => {_cardStores.add(CardStore(store))});
 
-    var ListStores = !isLoading
+    Widget listStores = !isLoading
         ? CustomScrollView(
             shrinkWrap: true,
             slivers: <Widget>[
@@ -87,10 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         : ColorLoader(colors: colors, duration: Duration(milliseconds: 1200));
 
-    // return Scaffold(
-    //   appBar: NavBar.getAppBar(),
-    //   body: ListStores,
-    // );
     return DefaultTabController(
         length: 4,
         child: Scaffold(
@@ -108,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           body: TabBarView(
             children: <Widget>[
-              ListStores,
+              listStores,
               Icon(Icons.directions_subway),
               Icon(Icons.directions_bike),
               Column(

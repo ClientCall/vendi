@@ -32,9 +32,16 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Center(
                   child: Hero(
                     tag: 'img-store-${widget.store.id}',
-                    child: Image.network(
-                      widget.store.urlImage,
-                    ),
+                    child: Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(0.0),
+                        image: new DecorationImage(
+                            image: new NetworkImage(widget.store.urlImage),
+                            fit: BoxFit.cover,
+                        )
+                      )
+                    ) 
                   ),
                 ),
                 onTap: () {
