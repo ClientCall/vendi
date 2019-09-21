@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:vendi/components/card_store.dart';
 import 'package:vendi/components/loader.dart';
 import 'package:vendi/components/nav_bar.dart';
@@ -5,15 +6,26 @@ import 'package:vendi/models/store.dart';
 import 'package:vendi/services/store.service.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  setPortraitOrientation();
+  runApp(MyApp());
+}
+
+setPortraitOrientation() async {
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Vendi',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
       ),
       home: MyHomePage(title: 'Vendi'),
     );
@@ -79,11 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //   appBar: NavBar.getAppBar(),
     //   body: ListStores,
     // );
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue
-      ),
-      home: DefaultTabController(
+    return DefaultTabController(
         length: 4,
         child: Scaffold(
           appBar:  AppBar(
@@ -96,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
               labelColor: Colors.white,
             ),
-            title: Text('Vendi'),
+            title: Text('Vendi 😁'),
           ),
           body: TabBarView(
             children: <Widget>[
@@ -114,7 +122,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-      )
     );
   }
 }

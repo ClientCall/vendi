@@ -1,3 +1,4 @@
+import 'package:vendi/Store/ui/screens/detail_screen.dart';
 import 'package:vendi/models/store.dart';
 import 'package:flutter/material.dart';
 
@@ -7,10 +8,10 @@ class CardStore extends StatelessWidget {
 
   CardStore(Store cardData) {
     this._cardData = cardData;
-    if(_cardData.description == null) {
+    if (_cardData.description == null) {
       _cardData.description = '';
     }
-    if(_cardData.urlImage == null) {
+    if (_cardData.urlImage == null) {
       _cardData.urlImage = 'https://picsum.photos/250?image=9';
     }
   }
@@ -33,13 +34,28 @@ class CardStore extends StatelessWidget {
             ),
           ),
           Container(
-            width: MediaQuery.of(context).size.width,
-            height: 200.0,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                 image: new DecorationImage(image: new NetworkImage(_cardData.urlImage),
-                fit: BoxFit.cover)
-            )),
+              width: MediaQuery.of(context).size.width,
+              height: 200.0,
+              child: GestureDetector(
+                child: Hero(
+                  tag: 'img-store-${_cardData.id}',
+                  child: Image.network(_cardData.urlImage),
+                ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return DetailScreen(store: _cardData);
+                  }));
+                  print('Click ${this._cardData.description}');
+                },
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  // image: new DecorationImage(
+                  //     image: new NetworkImage(_cardData.urlImage),
+                  //     fit: BoxFit.cover,
+                  // )
+              )
+          ),
           Positioned(
             top: 150.0,
             left: 15.0,
